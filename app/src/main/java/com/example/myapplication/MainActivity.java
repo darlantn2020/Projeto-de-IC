@@ -1,42 +1,25 @@
-package com.example.myapplication;//Como foi assinado seu projeto
-
-
-//Blibliotecas
-//----------------------------------------------------------------
-import androidx.appcompat.app.AppCompatActivity;
+package br.edu.utfpr.geladeira_v5;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-//----------------------------------------------------------------
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 
 public class MainActivity extends AppCompatActivity {
 
+    private androidx.appcompat.widget.AppCompatButton botao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button tBotao = (Button) findViewById((R.id.tBotao));
-        tBotao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TextView tLogin = (TextView) findViewById((R.id.tLogin));
-                TextView tSenha = (TextView) findViewById((R.id.tSenha));
-                String login = tLogin.getText().toString();
-                String senha = tSenha.getText().toString();
-                if (login.equals("d")&&senha.equals("1")) {
-                } else {
-                    alert("E-mail ou senha incorreta");
-                }
-            }
-        });
 
-    }
-
-    private void alert(String s) {
-        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        BotoesFragment fragment = new BotoesFragment();
+        fragmentTransaction.add(R.id.main_activity, fragment);
+        fragmentTransaction.commit();
     }
 }
